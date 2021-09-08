@@ -23,19 +23,19 @@
   "version": "1.0.0",
   "main": "01.app.js",
   "scripts": {
-    "start": "nodemon 02.upload",
+    "start": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/booldook/2021-sc-app-15-sql.git"
+    "url": "git+https://github.com/koojk/2021-java-15-sql.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/booldook/2021-sc-app-15-sql/issues"
+    "url": "https://github.com/koojk/2021-java-15-sql/issues"
   },
-  "homepage": "https://github.com/booldook/2021-sc-app-15-sql#readme",
+  "homepage": "https://github.com/koojk/2021-java-15-sql#readme",
   "description": ""
 }
