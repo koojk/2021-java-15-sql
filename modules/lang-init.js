@@ -9,7 +9,7 @@ module.exports = _lang => {
 				GLOBAL: {
 					LOGO					: '도서관리시스템',
 					TAB_TITLE			: 'Express 게시판',
-					NAVI					: ['도서 등록', '도서 리스트']
+					NAVI					: ['도서 등록', '도서 리스트', '로그인', '로그아웃', '회원가입']
 				},
 				LIST: {
 					TITLE 				: '도서 목록',
@@ -27,6 +27,10 @@ module.exports = _lang => {
 					TITLE 				: '도서 수정',
 					DESC 					: '수정할 도서 내용을 아래에서 변경하세요.',
 				},
+				JOIN: {
+					TITLE 				: '회원 가입',
+					DESC 					: '회원님의 가입 정보를 아래에 입력해 주세요.',
+				},
 				FIELD : {
 					NO						: '번호',
 					TITLE					: '제목',
@@ -37,12 +41,20 @@ module.exports = _lang => {
 					STATUS				: '판매',
 					UPFILE				: '첨부파일',
 				},
+				AUTH : {
+					USERID				: '아이디',
+					PASSWD				: '패스워드',
+					PASSWD2				: '패스워드 확인',
+					USERNAME			: '이름',
+					EMAIL					: '이메일',
+				},
 				BT: {
 					UPDATE				: '수정',
 					DELETE				: '삭제',
 					CREATE				: '등록',
 					LIST					: '리스트',
 					RESET					: '다시 등록',
+					JOIN					: '회원 가입',
 				},
 				MSG: {
 					DELETE				: '정말로 삭제하시겠습니까?'
@@ -56,7 +68,7 @@ module.exports = _lang => {
 				GLOBAL: {
 					LOGO					: 'BOOK MANAGEMENT SYSTEM',
 					TAB_TITLE			: 'Express Board',
-					NAVI: 				['Book Register', 'Book List']
+					NAVI: 				['Book Register', 'Book List', 'Login', 'Logout', 'Join']
 				},
 				LIST: {
 					TITLE 				: 'Book List',
@@ -74,6 +86,10 @@ module.exports = _lang => {
 					TITLE 				: 'Book Update',
 					DESC 					: 'Change the contents of the book to be edited below.',
 				},
+				JOIN: {
+					TITLE 				: 'Member Register',
+					DESC 					: 'Please enter the Profile you wish to register below.',
+				},
 				FIELD : {
 					NO						: 'No',
 					TITLE					: 'Title',
@@ -84,12 +100,20 @@ module.exports = _lang => {
 					STATUS				: 'Status',
 					UPFILE				: 'Attachment file',
 				},
+				AUTH : {
+					USERID				: 'User id',
+					PASSWD				: 'Password',
+					PASSWD2				: 'Password confirm',
+					USERNAME			: 'User name',
+					EMAIL					: 'Email',
+				},
 				BT: {
 					UPDATE				: 'UPDATE',
 					DELETE				: 'DELETE',
 					CREATE				: 'CREATE',
 					LIST					: 'LIST',
 					RESET					: 'RESET',
+					JOIN					: 'JOIN'
 				},
 				MSG: {
 					DELETE				: 'Are you sure you want to delete it?'
