@@ -1,6 +1,6 @@
 const { pool } = require('../../modules/mysql-init')
 
-const updateFile = file => {
+const updateBook = async book => {
 	try {
 		let { title, writer, content, idx } = book
 		let sql = " UPDATE books SET title=?, writer=?, content=? WHERE idx = ? "
@@ -14,4 +14,4 @@ const updateFile = file => {
 	}
 }
 
-module.exports = { updateFile } 
+module.exports = { updateBook } 

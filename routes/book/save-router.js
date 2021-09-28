@@ -8,32 +8,36 @@ const { moveFile } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 const uploader = require('../../middlewares/multer-book-mw')
 const { isUser, isGuest, isMyBook } = require('../../middlewares/auth-mw')
+const { updateBook, createBook } = require('../../models/book')
+const { findBookFiles, updateFile, createFile } = require('../../models/file')
 
 
 router.post('/', isUser, uploader.fields([{name: 'cover'}, {name: 'upfile'}]), isMyBook('body', 'U'), async (req, res, next) => {
 	try {
 		let book = { ...req.body, fidx: req.session.user.idx }
-		const r = (book._method === 'PUT' && book.idx) 
-			? await createBook(book) 
-			: await updateBook(book)
+		let isUpdate = book._method === 'PUT' && book.idx
+		const { idx: bookIdx } = isUpdate ? await updateBook(book) : await createBook(book)
 		
 		if(req.files) {
 			let fieldname;
 			for(let [k, [v]] of Object.entries(req.files)) {
 				fieldname = k.substr(0, 1).toUpperCase()
-				if(isUpdate) {
-					sql = " SELECT idx, savename FROM files WHERE fidx=? AND fieldname=? AND status=? "
-					values = [idx, fieldname, '1']
-					let [rsf] = await pool.execute(sql, values)
-					if(rsf.length > 0) {
-						sql = " UPDATE files SET status = '0' WHERE idx= " + rsf[0].idx
-						await pool.execute(sql)
-						await moveFile(rsf[0].savename)
+				if(isUpdate) { // 기존파일 처리
+					let { files } = await findBookFiles({ fidx: bookIdx, fieldname, status: '1' })
+					console.log(files)
+					if(files.length > 0) {
+						await updateFile(files.idx, [['status', '0']])
+						await moveFile(files.savename)
 					}
 				}
-				sql = " INSERT INTO files SET oriname=?, savename=?, mimetype=?, size=?, fieldname=?, fidx=? "
-				values = [v.originalname, v.filename, v.mimetype, v.size, fieldname, (isUpdate ? idx : rs.insertId)]
-				await pool.execute(sql, values)
+				await createFile({
+					oriname: v.originalname,
+					savename: v.filename,
+					mimetype: v.mimetype,
+					size: v.size,
+					fieldname, 
+					fidx: bookIdx 
+				})
 			}
 			res.redirect(`/${req.lang}/book`)
 		}
