@@ -1,4 +1,6 @@
 module.exports = { 
-	...require('./create-file'),
-	...require('./update-file'), 
+	...require('./create-book'),
+	...require('./update-book'), 
+	...require('./find-book'), 
+	...require('./delete-book'), 
 }
