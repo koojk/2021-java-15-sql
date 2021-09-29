@@ -3,11 +3,10 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const { error, alert } = require('../../modules/util')
-// const {  } = require('../../models/auth')
 
-router.get('/', passport.authenticate('kakao'))
+router.get('/', passport.authenticate('naver'))
 
-router.get('/cb', passport.authenticate('kakao', {failureRedirect: '/'}), (req, res, next) => {
+router.get('/cb', passport.authenticate('naver', {failureRedirect: '/'}), (req, res, next) => {
 	res.send(alert('로그인 되었습니다.'))
 })
 
