@@ -38,7 +38,6 @@ const findUser = async (key, value) => {
 		const [r] = await pool.execute(sql, [value])
 		if(r.length === 1) {
 			r[0].domain = r[0].domain ? r[0].domain.split(',').join('\r\n') : ''
-			
 			return { success: true, user: r[0] }
 		}
 		else 
@@ -63,6 +62,7 @@ const findAllUser = async (order = 'ASC') => {
 }
 
 // GET: field, value -> 회원존재여부
+// Login (아이디 중복 확인)
 const existUser = async (key, value) => {
 	try {
 		const sql = ` SELECT * FROM users WHERE ${key} = ? `
@@ -78,7 +78,7 @@ const existUser = async (key, value) => {
 const loginUser = async (userid, passwd) => {
 	let sql, compare
 	try {
-		sql = " SELECT * FROM users WHERE userid=? "
+		sql = " SELECT * FROM users WHERE userid=? AND status > 0 "
 		const [r] = await pool.execute(sql, [userid])
 		if(r.length === 1) {
 			compare = await bcrypt.compare(passwd + process.env.BCRYPT_SALT, r[0].passwd)

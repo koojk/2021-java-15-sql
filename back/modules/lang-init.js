@@ -27,7 +27,7 @@ module.exports = _lang => {
 				GLOBAL: {
 					LOGO					: '도서관리시스템',
 					TAB_TITLE			: 'Express 게시판',
-					NAVI					: ['도서 등록', '도서 리스트', '로그인', '로그아웃', '회원가입', '마이페이지', '회원정보수정', '도서 리스트(VUE)']
+					NAVI					: ['도서 등록', '도서 리스트', '로그인', '로그아웃', '회원가입', '마이페이지', '회원정보수정', '도서 리스트(VUE)', '회원탈퇴']
 				},
 				LIST: {
 					TITLE 				: '도서 목록',
@@ -90,6 +90,7 @@ module.exports = _lang => {
 					LIST					: '리스트',
 					RESET					: '다시 등록',
 					JOIN					: '회원 가입',
+					WITHDRAWAL					: '회원 탈퇴',
 					LOGIN					: '회원 로그인',
 					BACK					: '뒤로 가기',
 					APIKEY				: '인증키 생성/변경',
@@ -187,6 +188,7 @@ module.exports = _lang => {
 					LIST					: 'LIST',
 					RESET					: 'RESET',
 					JOIN					: 'JOIN',
+					WITHDRAWAL	: 'WITHDRAWAL',
 					LOGIN					: 'LOGIN',
 					BACK					: 'BACK',
 					APIKEY				: 'Auth-key create/update',
