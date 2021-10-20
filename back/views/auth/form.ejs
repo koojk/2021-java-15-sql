@@ -1,48 +1,81 @@
-<header class="header-wrapper">
-	<h1 class="logo"><a href="/<%= LANG %>/book"><%= GLOBAL.LOGO %></a></h1>
-	<nav class="navi-wrap">
-		<a href="/<%= LANG %>/book" class="navi"><%= GLOBAL.NAVI[1] %></a>
-		<% if(user) { %>
-			<a href="/<%= LANG %>/book/form" class="navi"><%= GLOBAL.NAVI[0] %></a>
-			<div class="navi bt-navi">
-				<%= GLOBAL.NAVI[5] %>
-				<div class="navi-sub">
-					<a href="/<%= LANG %>/mypage/user" class="sub"><%= GLOBAL.NAVI[6] %></a>
-					<a href="/<%= LANG %>/auth/logout" class="sub"><%= GLOBAL.NAVI[3] %></a>
-					<a href="/<%= LANG %>/auth/withdrawal" class="sub"><%= GLOBAL.NAVI[8] %></a>
-				</div>
-			</div>
-			<!-- <a href="/<%= LANG %>/auth/logout" class="navi"><%= GLOBAL.NAVI[3] %></a> -->
-			<% } else { %>
-				<a href="/<%= LANG %>/auth/login" class="navi"><%= GLOBAL.NAVI[2] %></a>
-				<a href="/<%= LANG %>/auth/form" class="navi"><%= GLOBAL.NAVI[4] %></a>
-			<% } %>
-			<a href="//127.0.0.1:8080" class="navi ex"><%= GLOBAL.NAVI[7] %></a>
-	</nav>
-	<nav class="lang-wrap">
-		<a href="javascript:chgLang('ko');" class="navi <%= (LANG === 'ko' ? 'active': '') %>">한국어</a>
-		<span> | </span>
-		<a href="javascript:chgLang('en');" class="navi <%= (LANG === 'en' ? 'active': '') %>">영어</a>
-	</nav>
-</header>
+<%- include('../inc/head', { css }) %> 
+<%- include('../inc/header') %>
+<script src="/js/promise.polyfill.min.js"></script> 
+<script src="/js/axios.min.js"></script> 
+<script src="/js/validator.min.js"></script> 
+<%- include('../inc/banner-auth') %> 
+<div class="form-wrapper wrapper">
+	<%- include('../inc/title-bar') %> 
+	<form action="/<%= LANG %>/auth/form" method="POST" name="saveForm">
+		<table>
+			<tbody>
+				<!-- 아이디 -->
+				<tr>
+					<td class="title require"><%= AUTH.USERID %></td>
+					<td class="content">
+						<input type="text" name="userid" class="form-control" placeholder="<%= AUTH.USERID %>" autofocus>
+						<div class="valid userid"></div>
+					</td>
+				</tr>
+				<!-- 패스워드 -->
+				<tr>
+					<td class="title require"><%= AUTH.PASSWD %></td>
+					<td class="content">
+						<input type="password" name="passwd" class="form-control" placeholder="<%= AUTH.PASSWD %>" autofocus>
+						<div class="valid passwd"></div>
+					</td>
+				</tr>
+				<!-- 패스워드 확인 -->
+				<tr>
+					<td class="title require"><%= AUTH.PASSWD2 %></td>
+					<td class="content">
+						<input type="password" name="passwd2" class="form-control" placeholder="<%= AUTH.PASSWD2 %>" autofocus>
+						<div class="valid passwd2"></div>
+					</td>
+				</tr>
+				<!-- 사용자 이름 -->
+				<tr>
+					<td class="title require"><%= AUTH.USERNAME %></td>
+					<td class="content">
+						<input type="text" name="username" class="form-control" placeholder="<%= AUTH.USERNAME %>">
+						<div class="valid username"></div>
+					</td>
+				</tr>
+				<!-- 이메일 -->
+				<tr>
+					<td class="title require"><%= AUTH.EMAIL %></td>
+					<td class="content">
+						<input type="text" name="email" class="form-control" placeholder="<%= AUTH.EMAIL %>">
+						<div class="valid email"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="btn-wrap p-3 text-center">
+			<button class="btn btn-success" id="btSave">
+				<%= BT.JOIN %>
+			</button>
+			<button class="btn btn-danger" type="reset"><%= BT.RESET %></button>
+		</div>
+	</form>
+</div>
 <script>
-	function chgLang(_lang) {
-		var protocol = location.protocol;
-		var host = location.host;
-		var pathname = location.pathname;
-		var path = pathname.split('/')
-		location.href = protocol + '//' + host + ((path[1] === 'ko' || path[1] === 'en')
-			? pathname.replace('/'+path[1]+'/', '/'+_lang+'/')
-			: '/' + _lang + pathname);
-	}
-
-	$('.header-wrapper .bt-navi').mouseenter(onNaviEnter);
-	$('.header-wrapper .bt-navi').mouseleave(onNaviLeave);
-	function onNaviEnter() {
-		$(this).find('.navi-sub').stop().slideDown();
-	}
-	function onNaviLeave() {
-		$(this).find('.navi-sub').stop().slideUp();
-	}
+	var ERR = {
+		ID_NULL			: "<%= ERROR.JOIN.ID_NULL %>",
+		ID_LEN			: "<%= ERROR.JOIN.ID_LEN %>",
+		ID_TAKEN		: "<%= ERROR.JOIN.ID_TAKEN %>",
+		ID_VALID		: "<%= ERROR.JOIN.ID_VALID %>",
+		ID_OK				: "<%= ERROR.JOIN.ID_OK %>",
+		PW_NULL			: "<%= ERROR.JOIN.PW_NULL %>",
+		PW_LEN			: "<%= ERROR.JOIN.PW_LEN %>",
+		PW2_NULL		: "<%= ERROR.JOIN.PW2_NULL %>",
+		PW2_LEN			: "<%= ERROR.JOIN.PW2_LEN %>",
+		PW_TAKEN		: "<%= ERROR.JOIN.PW_TAKEN %>",
+		NAME_NULL		: "<%= ERROR.JOIN.NAME_NULL %>",
+		EMAIL_NULL	: "<%= ERROR.JOIN.EMAIL_NULL %>",
+		EMAIL_VALID	: "<%= ERROR.JOIN.EMAIL_VALID %>",
+		EMAIL_TAKEN	: "<%= ERROR.JOIN.EMAIL_TAKEN %>",
+	};
 </script>
+<%- include('../inc/foot', { js }) %> 
 
